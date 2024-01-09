@@ -82,3 +82,46 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+from PIL import Image
+import streamlit as st
+
+# ... (your other imports and global variable declarations)
+
+# ... (your other code)
+
+# # to show chat history on ui
+# Initialize chat history and session state
+if "messages" not in st.session_state:
+    st.session_state.messages = [{"role": "assistant", "content": "How can I help you?", "image_path": None, "image_caption": None}]
+
+if "image_paths" not in st.session_state:
+    st.session_state.image_paths = []
+
+def main():
+    # ... (your existing code)
+
+    with st.chat_message("assistant"):
+        user_question = format_user_question(user_input)
+        answer, image_path = Copilot_assistant_agent.run(user_question)
+
+        st.markdown(answer)
+
+        if image_path:
+            image = Image.open(image_path)
+            st.image(image, caption="image", use_column_width=True)
+            st.session_state.image_paths.append(image_path)
+
+        st.session_state.messages.append({"role": "assistant", "content": full_response, 'image_path': image_path, "image_caption": "image"})
+
+        # Display old images from previous queries
+        for old_image_path in st.session_state.image_paths:
+            old_image = Image.open(old_image_path)
+            st.image(old_image, caption="image", use_column_width=True)
+
+        INITIALIZED = True
+
+# ... (the rest of your code)
