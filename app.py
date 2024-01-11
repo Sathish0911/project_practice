@@ -84,7 +84,7 @@ if __name__ == "__main__":
     main()
 
 
-
+###################################################################################################
 
 from PIL import Image
 import streamlit as st
@@ -123,6 +123,7 @@ def main():
             st.image(old_image, caption="image", use_column_width=True)
 
         INITIALIZED = True
+####################################################################################################################
 
 import pandas as pd
 import faker  # You might need to install this library using: pip install faker
@@ -149,6 +150,53 @@ def generate_fake_data(num_rows=5):
 fake_data = generate_fake_data()
 
 # Save the DataFrame to a CSV file
+
+########################################################################################################
+
+import pandas as pd
+import faker  # You might need to install this library using: pip install faker
+
+# Function to fake data for specific columns in an existing DataFrame
+def fake_data_for_columns(df, columns):
+    fake = faker.Faker()
+
+    for column in columns:
+        if column in df.columns:
+            # Check the column type to generate appropriate fake data
+            if df[column].dtype == 'object':
+                df[column] = [fake.address() for _ in range(len(df))]
+            elif df[column].dtype == 'float64':
+                df[column] = [fake.latitude() for _ in range(len(df))]
+            elif df[column].dtype == 'int64':
+                df[column] = [fake.random_int() for _ in range(len(df))]
+
+    return df
+
+# Example: Assuming you have an existing DataFrame called 'existing_df'
+existing_df = pd.DataFrame({
+    'site_name': ['ExampleSite1', 'ExampleSite2', 'ExampleSite3'],
+    'location_code': ['ABC123', 'DEF456', 'GHI789'],
+    'address': ['123 Main St', '456 Oak St', '789 Pine St'],
+    'latitude': [40.7128, 34.0522, 41.8781],
+    'longitude': [-74.0060, -118.2437, -87.6298],
+    'provider': ['Provider1', 'Provider2', 'Provider3'],
+    'state': ['NY', 'CA', 'IL'],
+    'country': ['USA', 'USA', 'USA']
+})
+
+# Specify the columns you want to fake
+columns_to_fake = ['address', 'latitude', 'longitude']
+
+# Call the function to fake data for specified columns
+fake_data_df = fake_data_for_columns(existing_df.copy(), columns_to_fake)
+
+# Display the original and modified DataFrames
+print("Original DataFrame:")
+print(existing_df)
+print("\nDataFrame with Fake Data:")
+print(fake_data_df)
+
+##########################################################################################
 fake_data.to_csv('fake_data.csv', index=False)
 
 # Display the generated DataFrame
