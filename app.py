@@ -124,4 +124,33 @@ def main():
 
         INITIALIZED = True
 
-# ... (the rest of your code)
+import pandas as pd
+import faker  # You might need to install this library using: pip install faker
+
+# Function to generate fake data
+def generate_fake_data(num_rows=5):
+    fake = faker.Faker()
+
+    data = {
+        'site_name': [fake.random_element(['3459302D 39394-S', '3430294D 29838-S']) for _ in range(num_rows)],
+        'location_code': [fake.random_element(['84739484C', '8459602C']) for _ in range(num_rows)],
+        'address': [fake.address() for _ in range(num_rows)],
+        'latitude': [fake.latitude() for _ in range(num_rows)],
+        'longitude': [fake.longitude() for _ in range(num_rows)],
+        'provider': [fake.company() for _ in range(num_rows)],
+        'state': [fake.state() for _ in range(num_rows)],
+        'country': ['USA' for _ in range(num_rows)]  # All entries are in the USA
+    }
+
+    df = pd.DataFrame(data)
+    return df
+
+# Generate fake data
+fake_data = generate_fake_data()
+
+# Save the DataFrame to a CSV file
+fake_data.to_csv('fake_data.csv', index=False)
+
+# Display the generated DataFrame
+print(fake_data)
+
