@@ -204,3 +204,16 @@ print(fake_data_df)
 # 6543210B 67890-A       2468135Y       101 Elm St              37.7749       -122.4194       Tech Solutions    CA     USA
 # 1234567C 54321-Z       13579024Q      555 Maple Ave           32.7157       -117.1611       Global Systems    CA     USA
 
+
+"PROACTIVE: PRIORITY 1
+
+INCIDENT START TIME: 09/06/2023 17:49:41
+NEID: wbasp3-05181s-32159001e010
+HOSTNAME: wbasp3-05181s-32159001e010
+IP ADDRESS:173.12.239.13
+PRODUCT TYPE: Managed WAN
+EQUIPMENT TYPE: Router
+INCIDENT TYPE: InterfaceUpDown SOURCED FROM ASSURE1
+ASSURE1 ALARM ID: 75509775201
+TEXT: Interface vni-0/3.0 is down (WAN interface for circuit name INET1)",
+
