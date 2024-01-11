@@ -217,3 +217,29 @@ INCIDENT TYPE: InterfaceUpDown SOURCED FROM ASSURE1
 ASSURE1 ALARM ID: 75509775201
 TEXT: Interface vni-0/3.0 is down (WAN interface for circuit name INET1)",
 
+import pandas as pd
+
+# Sample DataFrame with a 'description' column
+
+df = pd.DataFrame(data)
+
+# Define a function to extract information using regular expressions
+def extract_info(description):
+    result = pd.Series()
+    result['incident_type'] = re.search(r'INCIDENT TYPE: (.+?)\n', description).group(1) if re.search(r'INCIDENT TYPE: (.+?)\n', description) else None
+    result['assure1_alarm_id'] = re.search(r'ASSURE1 ALARM ID: (.+?)\n', description).group(1) if re.search(r'ASSURE1 ALARM ID: (.+?)\n', description) else None
+    result['text'] = re.search(r'TEXT: (.+)', description).group(1) if re.search(r'TEXT: (.+)', description) else None
+    result['hostname'] = re.search(r'HOSTNAME: (.+?)\n', description).group(1) if re.search(r'HOSTNAME: (.+?)\n', description) else None
+    result['ip_address'] = re.search(r'IP ADDRESS:(.+?)\n', description).group(1).strip() if re.search(r'IP ADDRESS:(.+?)\n', description) else None
+    # Add more columns as needed
+
+    return result
+
+# Apply the function to the 'description' column to create new columns
+df = df.join(df['description'].apply(extract_info))
+
+# Drop the original 'description' column if no longer needed
+df = df.drop('description', axis=1)
+
+# Display the resulting DataFrame
+print(df)
