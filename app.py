@@ -197,8 +197,10 @@ print("\nDataFrame with Fake Data:")
 print(fake_data_df)
 
 ##########################################################################################
-fake_data.to_csv('fake_data.csv', index=False)
-
-# Display the generated DataFrame
-print(fake_data)
+# site_name              location_code  address                  latitude      longitude       provider          state  country
+# 3459302D 39394-S       84739484C      123 Main St             40.7128       -74.0060        ABC Corp          NY     USA
+# 3430294D 29838-S       8459602C       456 Oak St              34.0522       -118.2437       XYZ Solutions     CA     USA
+# 9876543A 12345-B       7539512X       789 Pine St             41.8781       -87.6298        Data Innovators   IL     USA
+# 6543210B 67890-A       2468135Y       101 Elm St              37.7749       -122.4194       Tech Solutions    CA     USA
+# 1234567C 54321-Z       13579024Q      555 Maple Ave           32.7157       -117.1611       Global Systems    CA     USA
 
