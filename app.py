@@ -216,7 +216,7 @@ EQUIPMENT TYPE: Router
 INCIDENT TYPE: InterfaceUpDown SOURCED FROM ASSURE1
 ASSURE1 ALARM ID: 75509775201
 TEXT: Interface vni-0/3.0 is down (WAN interface for circuit name INET1)",
-
+######################################################################################################
 import pandas as pd
 
 # Sample DataFrame with a 'description' column
@@ -243,3 +243,22 @@ df = df.drop('description', axis=1)
 
 # Display the resulting DataFrame
 print(df)
+
+################################################################################
+import pandas as pd
+
+# Sample DataFrame with a 'datetime_str' column
+data = {'datetime_str': ["09/06/2023 17:49:41", "08/15/2022 12:30:15", "07/22/2021 09:10:30"]}
+df = pd.DataFrame(data)
+
+# Split the 'datetime_str' column into 'date' and 'time'
+df[['date', 'time']] = df['datetime_str'].str.split(' ', 1, expand=True)
+
+# Convert the 'date' column to datetime format
+df['date'] = pd.to_datetime(df['date'], format='%m/%d/%Y')
+
+# Display the resulting DataFrame
+print(df)
+
+#########################################################################################
+
